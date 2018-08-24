@@ -46,14 +46,12 @@ class Dog
   end
 
   def self.find_by_id(id)
-    sql = <<-SQL
-      SELECT *
-      FROM dogs
-      WHERE id = ?
-      LIMIT 1
-    SQL
-
-    @id = DB[:conn].execute(sql)
+    if self.id
+      self.update
+    else
+      sql = "SELECT * FROM dogs WHERE id = ?"
+      result = DB[:conn].execute(sql, id)
+      Dog.create(id: result[0], name: result[1], breed: result[2])
 
     end
 
