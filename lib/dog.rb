@@ -36,8 +36,6 @@ class Dog
 
     DB[:conn].execute(sql, self.name, self.breed)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
-    binding.pry
-
     self
   end
 
@@ -50,6 +48,8 @@ class Dog
   def self.find_by_id(id)
     sql = "SELECT * FROM dogs WHERE id = ?"
     result = DB[:conn].execute(sql, id)[0]
+    binding.pry
+
     dog = Dog.new(name: result[1], breed: result[2])
 
   end
