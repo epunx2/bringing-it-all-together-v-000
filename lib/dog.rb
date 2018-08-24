@@ -46,15 +46,9 @@ class Dog
   end
 
   def self.find_by_id(id)
-    if self.id
-      self.update
-    else
-      sql = "SELECT * FROM dogs WHERE id = ?"
-      result = DB[:conn].execute(sql, id)[0]
-      Dog.create(id: result[0], name: result[1], breed: result[2])
-
-    end
-
+    sql = "SELECT * FROM dogs WHERE id = ?"
+    result = DB[:conn].execute(sql, id)[0]
+    Dog.create(id: result[0], name: result[1], breed: result[2])
   end
 
 end
