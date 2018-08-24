@@ -53,7 +53,7 @@ class Dog
       LIMIT 1
     SQL
 
-    DB[:conn].execute(sql)
+    @id = DB[:conn].execute(sql)
 
     end
 
